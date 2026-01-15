@@ -1,0 +1,80 @@
+# ---------------------------
+# Visual Studio / MSBuild junk
+# ---------------------------
+.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+*.opendb
+*.ipch
+*.tlog
+*.log
+
+# IntelliSense / browse databases
+*.sdf
+*.opensdf
+*.browse.VC.db
+
+# ---------------------------
+# Build output folders
+# ---------------------------
+**/Debug/
+**/Release/
+**/x64/
+**/x86/
+**/bin/
+**/obj/
+**/out/
+build/
+
+# CMake (if you ever generate build trees)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+*.cmake
+
+# ---------------------------
+# Linker / compiler outputs
+# ---------------------------
+*.obj
+*.pch
+*.pdb
+*.idb
+*.ipdb
+*.iobj
+*.ilk
+*.exp
+*.lib
+*.dll
+*.exe
+*.map
+*.res
+*.aps
+
+# ---------------------------
+# BakkesMod local runtime artifacts
+# (your screenshot shows plugins/ contains built outputs)
+# ---------------------------
+plugins/
+
+# If you ever have local copies of bakkesmod data or models in-repo, ignore them:
+data/
+models/
+demoanalysis/
+
+# ---------------------------
+# Packaging / archives
+# ---------------------------
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+
+# ---------------------------
+# OS noise
+# ---------------------------
+Thumbs.db
+Desktop.ini
+.DS_Store
