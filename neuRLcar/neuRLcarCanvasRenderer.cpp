@@ -464,7 +464,7 @@ static void DrawCenteredText(CanvasWrapper& canvas,
     int r = 255, int g = 255, int b = 255, int a = 255,
     float xScale = 1.0f, float yScale = 1.0f)
 {
-    Vector2F sz = canvas.GetStringSize(text, xScale, yScale); // width/height in pixels :contentReference[oaicite:1]{index=1}
+    Vector2F sz = canvas.GetStringSize(text, xScale, yScale); // width/height in pixels :contentReference[oaicite:1]{index=1}  
     canvas.SetColor(r, g, b, a);
     canvas.SetPosition(Vector2F(centerX - (sz.X * 0.5f), y));
     canvas.DrawString(text, xScale, yScale);

@@ -323,9 +323,9 @@ void neuRLcar::updateLoadedDataset()
 	if (replay.IsNull()) return;
 	//if (replaydataloaded()) return;
 	auto current_model = cvarManager->getCvar("neurlcar_current_model").getStringValue();
-	auto replayname = replay.GetId().ToString();
+	auto replayid = replay.GetId().ToString();
 	auto bakkespath = gameWrapper->GetBakkesModPath();
-	auto analysispath = (bakkespath / "data" / "neurlcar" / "models" / current_model / "demoanalysis" / (replayname + ".csv"));
+	auto analysispath = (bakkespath / "data" / "neurlcar" / "models" / current_model / "demoanalysis" / (replayid + ".csv"));
 	//check if analysis exists
 	std::ifstream infile(analysispath.c_str());
 	bool analysisExists = infile.good();
@@ -399,22 +399,22 @@ void neuRLcar::generateAnalysis()
 	if (cvarManager->getCvar("neurlcar_analysis_busy").getBoolValue())
 		return;
 
-	cvarManager->getCvar("neurlcar_analysis_busy").setValue(1);
-
 	ReplayServerWrapper serverReplay = gameWrapper->GetGameEventAsReplay();
 	if (serverReplay.IsNull()) return;
 
 	ReplayWrapper replay = serverReplay.GetReplay();
 	if (replay.IsNull()) return;
 
-	auto replayname = replay.GetId().ToString();
-	auto replaypath = (replayFolder / (replayname + ".replay")).string();
+	cvarManager->getCvar("neurlcar_analysis_busy").setValue(1);
+
+	auto replayid = replay.GetId().ToString();
+	auto replaypath = replay.GetFilePath().ToString();
 	auto bakkespath = gameWrapper->GetBakkesModPath();
 	auto current_model = cvarManager->getCvar("neurlcar_current_model").getStringValue();
-	auto analysispath = (bakkespath / "data" / "neurlcar" / "models" / current_model / "demoanalysis" / (replayname + ".csv")).string();
+	auto analysispath = (bakkespath / "data" / "neurlcar" / "models" / current_model / "demoanalysis" / (replayid+ ".csv")).string();
 	auto exePath = (bakkespath / "data" / "neurlcar" / "models" / current_model / (current_model + "_applet.exe")).string();
 
-	LOG("ReplayFrames: async analysis requested for " + replayname);
+	LOG("ReplayFrames: async analysis requested for " + replayid);
 
 	std::thread([=]() {
 

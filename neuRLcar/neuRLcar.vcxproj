@@ -90,6 +90,12 @@
     <PreBuildEvent>
       <Command>powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File update_version.ps1 "./version.h"</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>"$(BakkesModPath)\bakkesmodsdk\bakkesmod-patch.exe" "$(TargetPath)"
+mkdir "$(BakkesModPath)\data\neurlcar" 2&gt;nul
+copy /Y "$(SolutionDir)scoreboard_wrapper.png" "$(BakkesModPath)\data\neurlcar\scoreboard_wrapper.png"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp" />
@@ -142,7 +148,7 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ReplayFrames.rc" />
+    <ResourceCompile Include="neuRLcar.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

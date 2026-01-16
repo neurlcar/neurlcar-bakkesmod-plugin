@@ -160,7 +160,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ReplayFrames.rc">
+    <ResourceCompile Include="neuRLcar.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
