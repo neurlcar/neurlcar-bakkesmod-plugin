@@ -19,6 +19,7 @@ std::shared_ptr<CVarManagerWrapper> _globalCvarManager;
 WCHAR* myDocuments = new WCHAR[MAX_PATH];
 HRESULT result = SHGetFolderPathW(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, myDocuments);
 std::filesystem::path replayFolder = (std::filesystem::absolute(std::wstring(myDocuments)) / "My Games" / "Rocket League" / "TAGame" / "Demos");
+std::filesystem::path replayFolderEpic = (std::filesystem::absolute(std::wstring(myDocuments)) / "My Games" / "Rocket League" / "TAGame" / "DemosEpic");
 
 //test
 std::string testreplayname = "mockypreds.csv";
@@ -399,22 +400,31 @@ void neuRLcar::generateAnalysis()
 	if (cvarManager->getCvar("neurlcar_analysis_busy").getBoolValue())
 		return;
 
+	cvarManager->getCvar("neurlcar_analysis_busy").setValue(1);
+
 	ReplayServerWrapper serverReplay = gameWrapper->GetGameEventAsReplay();
 	if (serverReplay.IsNull()) return;
 
 	ReplayWrapper replay = serverReplay.GetReplay();
 	if (replay.IsNull()) return;
 
-	cvarManager->getCvar("neurlcar_analysis_busy").setValue(1);
+	auto replayname = replay.GetId().ToString();
+	std::filesystem::path candidateSteam = replayFolder / (replayname + ".replay");
+	std::filesystem::path candidateEpic = replayFolderEpic / (replayname + ".replay");
 
-	auto replayid = replay.GetId().ToString();
-	auto replaypath = replay.GetFilePath().ToString();
+	std::filesystem::path replayPathFs =
+		std::filesystem::exists(candidateEpic) ? candidateEpic :
+		std::filesystem::exists(candidateSteam) ? candidateSteam :
+		candidateEpic; // default
+
+	auto replaypath = replayPathFs.string();
+	LOG("replay path chosen as: " + replaypath);
 	auto bakkespath = gameWrapper->GetBakkesModPath();
 	auto current_model = cvarManager->getCvar("neurlcar_current_model").getStringValue();
-	auto analysispath = (bakkespath / "data" / "neurlcar" / "models" / current_model / "demoanalysis" / (replayid+ ".csv")).string();
+	auto analysispath = (bakkespath / "data" / "neurlcar" / "models" / current_model / "demoanalysis" / (replayname + ".csv")).string();
 	auto exePath = (bakkespath / "data" / "neurlcar" / "models" / current_model / (current_model + "_applet.exe")).string();
 
-	LOG("ReplayFrames: async analysis requested for " + replayid);
+	LOG("ReplayFrames: async analysis requested for " + replayname);
 
 	std::thread([=]() {
 
