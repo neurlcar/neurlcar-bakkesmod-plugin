@@ -21,7 +21,7 @@ HRESULT result = SHGetFolderPathW(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT
 std::filesystem::path replayFolder = (std::filesystem::absolute(std::wstring(myDocuments)) / "My Games" / "Rocket League" / "TAGame" / "Demos");
 std::filesystem::path replayFolderEpic = (std::filesystem::absolute(std::wstring(myDocuments)) / "My Games" / "Rocket League" / "TAGame" / "DemosEpic");
 
-//test
+//test.
 std::string testreplayname = "mockypreds.csv";
 
 char apiKeyInput[256] = "";
