@@ -257,10 +257,6 @@ void neuRLcar::RenderSettingsContents()
     if (ImGui::Checkbox("Show hotkey reminders", &b))
         SetBoolAndSave("neurlcar_ui_show_hotkey_reminders", b);
 
-    b = C("neurlcar_ui_show_title").getBoolValue();
-    if (ImGui::Checkbox("Show neuRLcar title", &b))
-        SetBoolAndSave("neurlcar_ui_show_title", b);
-
     b = C("neurlcar_ui_enabled").getBoolValue();
     if (ImGui::Checkbox("neuRLcar replay overlay on/off", &b))
         SetBoolAndSave("neurlcar_ui_enabled", b);

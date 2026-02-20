@@ -273,7 +273,6 @@ struct NeuRLcarConfig
 
     int mainEvalAlpha = 220;
 
-    bool showTitleText = true;
     bool showHotkeyReminders = true;
 
     int pastRows = 150;          // frames
@@ -290,7 +289,6 @@ static NeuRLcarConfig LoadConfig(CVarManagerWrapper* cvarManager)
     cfg.showMainEval = cvarManager->getCvar("neurlcar_ui_show_maineval").getBoolValue();
     cfg.showMainBackground = cvarManager->getCvar("neurlcar_ui_show_mainbg").getBoolValue();
 
-    cfg.showTitleText = cvarManager->getCvar("neurlcar_ui_show_title").getBoolValue();
     cfg.showHotkeyReminders = cvarManager->getCvar("neurlcar_ui_show_hotkey_reminders").getBoolValue();
 
     cfg.pastRows = cvarManager->getCvar("neurlcar_ui_past_breadth").getIntValue();
@@ -529,12 +527,13 @@ static void DrawScoreboardWrapperPng(CanvasWrapper& canvas, GameWrapper* gw)
     float y = -(screen.Y * yUpFrac);
 
     canvas.SetPosition(Vector2(x, y));
+    canvas.SetColor(255, 255, 255, 255);
     canvas.DrawTexture(img.get(), scale);
 }
 
 
 
-// ====================
+// ===================
 // Canvas entrypoint
 // ====================
 void neuRLcar::RenderCanvas(CanvasWrapper canvas)
@@ -603,13 +602,6 @@ void neuRLcar::RenderCanvas(CanvasWrapper canvas)
 
     for (auto& el : elements)
         if (el) el->Render(ctx);
-
-    if (cfg.showTitleText)
-    {
-        float xCenter = lay.screenW * 0.5f;
-        float y = lay.screenH * 0.00f;
-        DrawCenteredText(canvas, "neuRLcar :D", xCenter, y, 255, 255, 255, 255);
-    }
 
 
 

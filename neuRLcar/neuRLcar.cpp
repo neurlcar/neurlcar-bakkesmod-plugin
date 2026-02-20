@@ -183,7 +183,7 @@ void neuRLcar::onLoad()
 
 	cvarManager->registerCvar("neurlcar_model_ready", "0", "1 if the current model has required applet exe and _internal folder");
 
-	cvarManager->registerCvar("neurlcar_ui_show_topbars", "1", "");
+	cvarManager->registerCvar("neurlcar_ui_show_topbars", "0", "");
 	cvarManager->registerCvar("neurlcar_ui_show_maineval", "1", "");
 	cvarManager->registerCvar("neurlcar_ui_show_mainbg", "1", "");
 	cvarManager->registerCvar("neurlcar_ui_show_midline", "1", "");
@@ -193,7 +193,6 @@ void neuRLcar::onLoad()
 	cvarManager->registerCvar("neurlcar_ui_smoothing_window", "0", "");
 	cvarManager->registerCvar("neurlcar_ui_debug_grid", "0", "Show debug grid (1% increments)");
 	cvarManager->registerCvar("neurlcar_ui_enabled", "1", "Enable neuRLcar UI");
-	cvarManager->registerCvar("neurlcar_ui_show_title", "1", "Show 'neuRLcar' title text");
 	cvarManager->registerCvar("neurlcar_ui_show_hotkey_reminders", "1", "Show hotkey reminder text");
 	cvarManager->registerCvar("neurlcar_ui_maineval_alpha","165","Alpha transparency for main eval background (0-255)",true, true, 0.0f, true, 255.0f);
 	cvarManager->registerCvar(
